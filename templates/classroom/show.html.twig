@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ classroom.subject }}
+{% endblock %}
+
+{% block body %}
+    {% if app.user %}
+    <h1>{{ classroom.subject }}</h1>
+    <h6>{{ classroom.teacher.username }}</h6>
+    <p>{{ classroom.meetingTimes }}</p>
+    <p>{{ classroom.currentCount }} / {{ classroom.maxCount }}</p>
+    <hr>
+    {% if app.user == classroom.teacher %}
+        {% if classroom.syllabus == null  %}
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            {{ form_end(form) }}
+        {% endif %}
+        {% endif %}
+        <a href="/">Go Back</a>
+        <hr>
+        {% if classroom.syllabus %}
+            <div style="text-align:center;">
+                <h1>Syllabus</h1>
+                <embed src="{{ asset('uploads/') ~ image}}" width="100%" height="1000px"/>
+            </div>
+            <hr>
+        {% endif %}
+    {% else %}
+        <a href="/login">Login</a>
+    {% endif %}
+
+{% endblock %}

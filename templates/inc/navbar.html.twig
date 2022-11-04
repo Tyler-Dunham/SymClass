@@ -1,0 +1,30 @@
+<nav class="navbar navbar-expand-sm navbar-dark bg-primary mb-3">
+    <div class="container">
+        <a href="/" class="navbar-brand">Symclass</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mobile-nav">
+            <span class="navbar-toggle-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="mobile-nav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a href="/" class="nav-link">Classrooms</a>
+                </li>
+                {% if is_granted('ROLE_ADMIN') %}
+                <li class="nav-item">
+                    <a href="/classroom/new" class="nav-link">New Classroom</a>
+                </li>
+                {% endif %}
+                {% if app.user %}
+                <li class="nav-item">
+                    <a href="/logout" class="nav-link">Logout</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a href="/login" class="nav-link">Login</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>

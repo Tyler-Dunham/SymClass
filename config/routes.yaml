@@ -1,0 +1,42 @@
+classroom:
+    path: /
+    controller: App\Controller\ClassroomController::index
+
+classroom_submit:
+    path: /classroom/new
+    controller: App\Controller\ClassroomController::new
+    methods: GET|POST
+
+classroom_join:
+    path: /classrooms/join/{id}
+    controller: App\Controller\ClassroomController::join
+
+classroom_leave:
+    path: /classrooms/leave/{id}
+    controller: App\Controller\ClassroomController::leave
+
+classroom_show:
+    path: /classrooms/{id}
+    controller: App\Controller\ClassroomController::show
+
+
+
+
+
+registration:
+    path: /register
+    controller: App\Controller\RegistrationController::register
+    methods: GET|POST
+
+login:
+    path: /login
+    controller: App\Controller\LoginController::login
+
+app_login:
+    path: /login
+    controller: App\Controller\LoginController::login
+
+app_logout:
+    path: /logout
+    controller: App\Controller\LoginController::logout
+    methods: GET

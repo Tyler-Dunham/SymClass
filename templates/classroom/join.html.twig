@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ classroom.subject }}
+{% endblock %}
+
+{% block body %}
+    {% if app.user %}
+        <h1>Error. May already be in class, the class is too full, or invalid permissions.</h1>
+
+    {% else %}
+        <a href="/login">Login</a>
+    {% endif %}
+{% endblock %}
