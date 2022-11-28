@@ -16,6 +16,6 @@ class UserController extends AbstractController
         $user = $doctrine->getRepository(User::class)->find($loggedUser);
         $classrooms = $user->getClasses();
 
-        return $this->render('user/index.html.twig', array('classrooms' => $classrooms));
+        return $this->render('user/index.html.twig', array('classrooms' => $classrooms, 'user' => $user));
     }
 }

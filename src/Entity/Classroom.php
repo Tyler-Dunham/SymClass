@@ -36,6 +36,9 @@ class Classroom
     #[ORM\Column(type: Types::INTEGER)]
     private ?string $maxCount = null;
 
+    #[ORM\Column(type: Types::INTEGER)]
+    private ?string $credits = null;
+
     #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'classes')]
     private Collection $user;
 
@@ -80,6 +83,16 @@ class Classroom
     public function setCurrentCount($currentCount)
     {
         $this->currentCount = $currentCount;
+    }
+
+    public function getCredits()
+    {
+        return $this->credits;
+    }
+
+    public function setCredits($credits)
+    {
+        $this->credits = $credits;
     }
 
     public function getMaxCount()

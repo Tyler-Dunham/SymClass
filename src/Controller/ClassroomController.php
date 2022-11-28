@@ -34,6 +34,7 @@ class ClassroomController extends AbstractController
             ->add('currentCount', IntegerType::class, array('attr' => array('class' => 'form-control')))
             ->add('maxCount', IntegerType::class, array('attr' => array('class' => 'form-control')))
             ->add('meetingTimes', TextType::class, array('attr' => array('class' => 'form-control')))
+            ->add('credits', IntegerType::class, array('attr' => array('class' => 'form-control')))
             ->add('save', SubmitType::class, array('label' => 'Create', 'attr' => array('class' => 'btn btn-primary mt-3')))
             ->getForm();
 
@@ -69,6 +70,9 @@ class ClassroomController extends AbstractController
                 $classroom->setCurrentCount($currentCount);
                 $classroom->addUser($user);
                 $user->addClass($classroom);
+                $classCredits = $classroom->getCredits();
+                $userCredits = $user->getCredits();
+                $user->setCredits($classCredits + $userCredits);
                 $em->flush();
 
                 return $this->redirectToRoute('classroom');
@@ -94,6 +98,9 @@ class ClassroomController extends AbstractController
                 $classroom->setCurrentCount($currentCount);
                 $classroom->removeUser($user);
                 $user->removeClass($classroom);
+                $classCredits = $classroom->getCredits();
+                $userCredits = $user->getCredits();
+                $user->setCredits($userCredits - $classCredits);
                 $em->flush();
     
                 return $this->redirectToRoute('classroom');

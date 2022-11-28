@@ -9,6 +9,7 @@
                 <thead>
                     <tr>
                         <th>Subject</th>
+                        <th>Credits</th>
                         <th>Class ID</th>
                         <th>Teacher</th>
                         <th>Count</th>
@@ -20,6 +21,9 @@
                         <tr>
                             <td>
                                 {{class.subject}}
+                            </td>
+                            <td>
+                                {{class.credits}}
                             </td>
                             <td>
                                 {{class.id}}
@@ -39,6 +43,7 @@
                     {% endfor %}
                 </tbody>
             </table>
+            <h5>Total credits: {{ user.credits }}</h1>
         {% else %}
             <h1>Not enrolled for any classes yet! Start enrolling <u><span><a href="/">here</a></span></u></h1>
         {% endif %}

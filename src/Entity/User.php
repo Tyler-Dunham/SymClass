@@ -9,6 +9,7 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[UniqueEntity(fields: ['username'], message: 'There is already an account with this username')]
@@ -25,6 +26,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private array $roles = ['ROLE_USER'];
 
+    #[ORM\Column(type: Types::INTEGER)]
+    private ?string $credits = null;
+
     #[ORM\ManyToMany(targetEntity: Classroom::class, inversedBy: 'getUser')]
     private Collection $classes;
 
@@ -39,6 +43,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->id;
     }
 
+    public function getCredits()
+    {
+        return $this->credits;
+    }
+
+    public function setCredits($credits)
+    {
+        $this->credits = $credits;
+    }
 
     public function getUsername(): ?string
     {
