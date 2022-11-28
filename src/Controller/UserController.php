@@ -14,7 +14,14 @@ class UserController extends AbstractController
     public function enrollment(ManagerRegistry $doctrine): Response {
         $loggedUser = $this->getUser();
         $user = $doctrine->getRepository(User::class)->find($loggedUser);
-        $classrooms = $user->getClasses();
+        $permissions = $loggedUser->getRoles();
+        
+        if (in_array('ROLE_TEACHER', $permissions)){
+            $classrooms = $doctrine->getRepository(Classroom::class)->findBy(array('teacher' => $user->getId()));
+        }
+        elseif (in_array('ROLE_STUDENT', $permissions)) {
+            $classrooms = $user->getClasses();
+        }
 
         return $this->render('user/index.html.twig', array('classrooms' => $classrooms, 'user' => $user));
     }

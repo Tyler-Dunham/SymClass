@@ -43,7 +43,11 @@
                     {% endfor %}
                 </tbody>
             </table>
-            <h5>Total credits: {{ user.credits }}</h1>
+            {% if is_granted('ROLE_TEACHER') %}
+                <h5>Total classes: {{ classrooms|length }}</h5>
+            {% elseif is_granted('ROLE_STUDENT') %}
+                <h5>Total credits: {{ user.credits }}</h5>
+            {% endif %}
         {% else %}
             <h1>Not enrolled for any classes yet! Start enrolling <u><span><a href="/">here</a></span></u></h1>
         {% endif %}
