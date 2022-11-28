@@ -19,6 +19,9 @@ classroom_show:
     path: /classrooms/{id}
     controller: App\Controller\ClassroomController::show
 
+enrolled:
+    path: /enrollment
+    controller: App\Controller\UserController::enrollment
 
 
 

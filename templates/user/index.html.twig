@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Enrollment{% endblock %}
+
+{% block body %}
+    {% if app.user %}
+        {% if classrooms %}
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Subject</th>
+                        <th>Class ID</th>
+                        <th>Teacher</th>
+                        <th>Count</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>   
+                    {% for class in classrooms %}
+                        <tr>
+                            <td>
+                                {{class.subject}}
+                            </td>
+                            <td>
+                                {{class.id}}
+                            </td>
+                            <td>
+                                {{class.teacher.username}}
+                            </td>
+                            <td>
+                                {{class.currentCount}} / {{ class.maxCount }}
+                            </td>
+                            <td>
+                                <a href="/classrooms/join/{{ class.id }}" class="btn">Join</a>
+                                <a href="/classrooms/leave/{{ class.id }}" class="btn">Leave</a>
+                                <a href="/classrooms/{{ class.id }}" class="btn">View</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <h1>Not enrolled for any classes yet! Start enrolling <u><span><a href="/">here</a></span></u></h1>
+        {% endif %}
+    {% else %}
+        <a href="/login">Login</a>
+    {% endif %}
+{% endblock %}
